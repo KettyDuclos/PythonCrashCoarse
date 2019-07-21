@@ -26,6 +26,19 @@ class User():
             self.login_attempt = 0
         return self.login_attempt
 
+class Privileges():
+    """Initialize privilege attributes"""
+    
+    def __init__(self):
+        self.privileges = ['can add post', 'can delete post', 'can ban user']
+
+    def show_privileges(self):
+        admin_privileges = ''
+        for privilege in self.privileges:
+            admin_privileges += " " + privilege
+        print("The following privileges are grant to Admin: " + admin_privileges)
+    
+
 class Admin(User):
     """Represents aspects of a user, specific to admin"""
 
@@ -34,14 +47,16 @@ class Admin(User):
            Then initializes attributes specific to Admin"""
 
         super().__init__(first_name, last_name, email, password)
-        self.privileges = ['can add post', 'can delete post', 'can ban user']
+        self.privileges = Privileges()
+        
 
-    def show_privileges(self):
-        admin_privileges = ''
-        for privilege in self.privileges:
-            admin_privileges += " " + privilege
-        print("The following privileges are grant to Admin: " + admin_privileges)
+
+
+
+   
 
 admin = Admin("Ketty", "Duclos", "kd@yahoo.com", "password")
 admin.greet_user()
-admin.show_privileges()
+
+admin_2 = Admin("Kaleb", "Drane", "kd@yahoo.com", "password")
+admin_2.privileges.show_privileges()
