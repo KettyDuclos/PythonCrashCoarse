@@ -1,3 +1,5 @@
+"""a class that can be used to represent a Restaurant"""
+
 class Restaurant():
     """Simple attempt a modeling a Restaurant"""
     def __init__(self, restaurant_name, cuisine_type):
@@ -13,7 +15,4 @@ class Restaurant():
         print(self.restaurant_name + " is open for business!")
 
 
-restaurant = Restaurant("The Island Spot", "West Indian")
-restaurant.describe_restaurant()
-restaurant.open_restaurant()
         

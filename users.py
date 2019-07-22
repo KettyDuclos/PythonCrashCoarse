@@ -1,3 +1,5 @@
+""" classes that can be used to represent different aspects of a user"""
+
 class User():
     """A simple attempt to model a website user"""
 
@@ -26,14 +28,31 @@ class User():
             self.login_attempt = 0
         return self.login_attempt
 
+class Privileges():
+    """Initialize privilege attributes"""
+    
+    def __init__(self):
+        self.privileges = ['can add post', 'can delete post', 'can ban user']
 
-user = User("Ketty", "Duclos", "kettyD@yahoo.com", "password")
+    def show_privileges(self):
+        admin_privileges = ''
+        for privilege in self.privileges:
+            admin_privileges += " " + privilege
+        print("The following privileges are grant to Admin: " + admin_privileges)
+    
 
-user.describe_user()
-user.greet_user()
+class Admin(User):
+    """Represents aspects of a user, specific to admin"""
 
-user.increment_login_attempts()
-user.reset_login_attempts()
+    def __init__(self, first_name, last_name, email, password):
+        """Initializes attributes of the parent  class
+           Then initializes attributes specific to Admin"""
+
+        super().__init__(first_name, last_name, email, password)
+        self.privileges = Privileges()
+
+
+
 
 
 
