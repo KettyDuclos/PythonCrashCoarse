@@ -38,7 +38,7 @@ class Privileges():
         admin_privileges = ''
         for privilege in self.privileges:
             admin_privileges += " " + privilege
-        print("The following privileges are grant to Admin: " + admin_privileges)
+        print("The following privileges are granted to Admins: " + admin_privileges)
     
 
 class Admin(User):
