@@ -1,0 +1,4 @@
+In Python you can store data in vatious data structures
+In Python you can read, write and append to files
+In python you can add logic to code with conditional statements
+In Python you can import internal and external modules
