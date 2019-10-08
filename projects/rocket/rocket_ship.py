@@ -1,28 +1,26 @@
 import pygame
-
-class Ship():
-
-    def __init__(self, screen):
-        """Initialize the ship and set its starting position"""
-        self.screen = screen
-
-        #Load the ship image and get its rect.
-        self.image = pygame.image.load('img/ship.bmp') #this function returns a surface representing the ship
-        self.rect = self.image.get_rect()  #use get.rect() to access the surface's rect attribute
-        self.screen_rect = screen.get_rect()
-
-        #Start each new ship at the bottom center of the screen
-        self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
-
-    def blitme(self):
-        """Draw the rocket ship at its current location"""
-        self.screen.blit(self.image, self.rect)
+from settings import Setting
+from rocket import Ship
+import game_functions as gf
 
 
+def run_game():
+    #initialize the pygame, settings and create a screen object.
+    pygame.init()
+    rs_settings = Setting()
+    screen = pygame.display.set_mode(
+        (rs_settings.screen_width, rs_settings.screen_height))
+    pygame.display.set_caption("Rocket Invasion")
 
+    #Make a ship.
+    ship = Ship(screen)
 
+    #Start the main loop for the game
+    while True:
 
+        #Watch for keyboard and mouse events.
+        gf.check_events(ship)
+        ship.update()
+        gf.update_screen(rs_settings, screen, ship)
 
-
-
+run_game()

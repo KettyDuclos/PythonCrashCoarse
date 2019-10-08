@@ -1,50 +1,40 @@
 import pygame
-import sys
-from rocket_ship import Ship
 
-def run_game():
-    #Initialize game and create a screen object
-    pygame.init()
-    screen = pygame.display.set_mode((1200, 400))
-    pygame.display.set_caption("Rocket Invasion")
+class Ship():
+    
 
-    #Make a rocket_ship
-    ship = Ship(screen)
+    def __init__(self, screen):
+        """Initialize the ship and set its starting position"""
+        self.screen = screen
 
-    #store bg color
-    bg_color = (230,230,230)
+        #Load the ship image and get its rect.
+        self.image = pygame.image.load('img/ship.bmp')
+        self.rect = self.image.get_rect()
+        self.screen_rect = screen.get_rect()
+
+        #Start each new ship at the bottom center of the screen.
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.bottom = self.screen_rect.bottom
+
+        #Movement flag
+        self.moving_right = False
+        self.moving_left = False
+        self.moving_up = False
+        self.moving_down = False
+
+    def update(self):
+        """Update the ship's position based on the movement flag."""
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            self.rect.centerx += 1
+        if self.moving_left and self.rect.left > 0:
+            self.rect.centerx -= 1
+        if self.moving_up:
+            self.rect.top -= 1
+        if self.moving_down:
+            self.rect.bottom += 1
+
+    def blitme(self):
+            """Draw the ship at its current location"""
+            self.screen.blit(self.image, self.rect)
 
 
-    #Start the main loop for the game
-    while True:
-
-        #Watch for keyboard and mouse events
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-            
-            #game navigation
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    #move ship to the right
-                    ship.rect.centerx += 1
-                if event.key == pygame.K_LEFT:
-                    #move ship to the left
-                    ship.rect.centerx -= 1
-                if event.key == pygame.K_UP:
-                    #move ship up
-                    ship.rect.top -= 1
-                if event.key == pygame.K_DOWN:
-                    ship.rect.bottom += 1
-
-
-        
-        
-        #Redraw the screen during each pass through the loop
-        screen.fill(bg_color)
-        ship.blitme()
-
-        #Make the most recently drawn screen visible
-        pygame.display.flip()
-
-run_game()
