@@ -1,4 +1,6 @@
 import requests
+import pygal
+from pygal.style import LightColorizedStyle as LCS, LightenStyle as LS
 
 #Make an API call and store the response
 
@@ -22,6 +24,25 @@ repo_dict = repo_dicts[0]
 print('\nKeys:', len(repo_dict))
 for key in sorted(repo_dict.keys()):
     print(key)
+
+#Selected information about the repositories
+print("\nSelected information about first repository:")
+print('Name:', repo_dict['name'])
+print('ID:', repo_dict['id'])
+print('Owner:', repo_dict['owner']['login'])
+
+
+#Visualizing Repositories Using Pygal
+#Visualization showing the relative popularity of Python projects on Github
+
+names, stars = [], []
+for repo_dict in repo_dicts:
+    names.append(repo_dict['name'])
+    stars.append(repo_dict['stargazers_count'])
+
+#Make visualization.
+
+
 
 
 
